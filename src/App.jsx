@@ -202,7 +202,7 @@ const FreezePix = () => {
       artist: "Light Studios",
       price: 399,
       image:
-        "https://images.unsplash.com/photo-1494790108755-2616c0763c54?w=400&h=300&fit=crop",
+        "https://images.stockcake.com/public/1/a/2/1a2c3354-6b4e-4665-a33c-6c87b14ecbf3_large/sunset-golden-hour-stockcake.jpg",
       category: "portraits",
       rating: 5.0,
       sizes: ["16x20", "24x30", "30x40"],
@@ -673,7 +673,7 @@ const FreezePix = () => {
       <div className="bg-white py-12 px-4 border-b">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-bold mb-4">
-            freeze<span className="text-yellow-400">Pix</span>
+            Freeze<span className="text-yellow-400">PIX</span>
           </h1>
           <p className="text-xl text-gray-600 italic">{t.subtitle}</p>
         </div>
@@ -938,7 +938,7 @@ const FreezePix = () => {
               className="flex items-center cursor-pointer"
             >
               <h1 className="text-2xl font-bold">
-                freeze<span className="text-yellow-400">Pix</span>
+                Freeze<span className="text-yellow-400">PIX</span>
               </h1>
             </div>
 
