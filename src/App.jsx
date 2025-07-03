@@ -26,6 +26,7 @@ const FreezePix = () => {
   const [shoppingBag, setShoppingBag] = useState([]);
   const [showBagModal, setShowBagModal] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Load shopping bag from localStorage on component mount
   useEffect(() => {
@@ -913,16 +914,22 @@ const FreezePix = () => {
   );
 
   const renderPage = () => {
+    setIsLoading(true); // Start loading
     switch (currentPage) {
       case "home":
+        setIsLoading(false);
         return <HomePage />;
       case "market":
+        setIsLoading(false);
         return <MarketPage />;
       case "printing":
+        setIsLoading(false);
         return <PrintingPage />;
       case "booking":
+        setIsLoading(false);
         return <BookingPage />;
       default:
+        setIsLoading(false);
         return <HomePage />;
     }
   };
@@ -1029,9 +1036,13 @@ const FreezePix = () => {
           </div>
         </div>
       )}
-
-      {/* Main Content */}
-      <main>{renderPage()}</main>
+  {/* Main Content */}
+  {isLoading ? (
+ <div className="loading-animation">
+ <div className="spinner"></div>
+</div>      ) : (
+        <main>{renderPage()}</main>
+      )}
 
       {/* Shopping Bag Modal */}
       {showBagModal && (
