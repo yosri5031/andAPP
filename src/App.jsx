@@ -15,9 +15,11 @@ import {
   Minus,
   Trash2,
 } from "lucide-react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const FreezePix = () => {
-  const [currentPage, setCurrentPage] = useState("home");
+    const [currentPage, setCurrentPage] = useState("home");
+    const [isLoading, setIsLoading] = useState(false);
   const [language, setLanguage] = useState("en");
   const [showMenu, setShowMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("featured");
@@ -913,16 +915,22 @@ const FreezePix = () => {
   );
 
   const renderPage = () => {
+    setIsLoading(true); // Start loading
     switch (currentPage) {
       case "home":
+        setIsLoading(false);
         return <HomePage />;
       case "market":
+        setIsLoading(false);
         return <MarketPage />;
       case "printing":
+        setIsLoading(false);
         return <PrintingPage />;
       case "booking":
+        setIsLoading(false);
         return <BookingPage />;
       default:
+        setIsLoading(false);
         return <HomePage />;
     }
   };
@@ -1030,8 +1038,14 @@ const FreezePix = () => {
         </div>
       )}
 
-      {/* Main Content */}
-      <main>{renderPage()}</main>
+{/* Main Content */}
+{isLoading ? (
+        <div className="loading-animation">
+          <ClipLoader color="#3498db" loading={isLoading} size={60} />
+        </div>
+      ) : (
+        <main>{renderPage()}</main>
+      )}
 
       {/* Shopping Bag Modal */}
       {showBagModal && (
