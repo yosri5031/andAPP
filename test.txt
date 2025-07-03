@@ -1,0 +1,99 @@
+import React, { useState, useEffect } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+// ... other imports
+
+const FreezePix = () => {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [isLoading, setIsLoading] = useState(false);
+  // ... other states
+
+  // Handle page navigation with loading
+  const navigateToPage = (page) => {
+    setIsLoading(true);
+    setCurrentPage(page);
+    
+    // Simulate loading time (adjust as needed)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // 500ms loading time
+  };
+
+  // Simple render function without state changes
+  const renderPage = () => {
+    switch (currentPage) {
+      case "home":
+        return <HomePage />;
+      case "market":
+        return <MarketPage />;
+      case "printing":
+        return <PrintingPage />;
+      case "booking":
+        return <BookingPage />;
+      default:
+        return <HomePage />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        {/* Your header content */}
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-96">
+            <ClipLoader 
+              color="#3498db" 
+              loading={isLoading} 
+              size={60}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        ) : (
+          renderPage()
+        )}
+      </main>
+
+      {/* Bottom Navigation */}
+      <nav className="bg-white border-t">
+        <div className="flex justify-around py-2">
+          <button 
+            onClick={() => navigateToPage("home")}
+            className="flex flex-col items-center p-2"
+          >
+            {/* Home icon and text */}
+          </button>
+          <button 
+            onClick={() => navigateToPage("market")}
+            className="flex flex-col items-center p-2"
+          >
+            {/* Market icon and text */}
+          </button>
+          <button 
+            onClick={() => navigateToPage("printing")}
+            className="flex flex-col items-center p-2"
+          >
+            {/* Printing icon and text */}
+          </button>
+          <button 
+            onClick={() => navigateToPage("booking")}
+            className="flex flex-col items-center p-2"
+          >
+            {/* Booking icon and text */}
+          </button>
+        </div>
+      </nav>
+
+      {/* Shopping Bag Modal */}
+      {showBagModal && (
+        <ShoppingBagModal onClose={() => setShowBagModal(false)} />
+      )}
+    </div>
+  );
+};
+
+export default FreezePix;

@@ -914,23 +914,30 @@ const FreezePix = () => {
     </div>
   );
 
+
+  // Handle page navigation with loading
+  const navigateToPage = (page) => {
+    setIsLoading(true);
+    setCurrentPage(page);
+    
+    // Simulate loading time (adjust as needed)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // 500ms loading time
+  };
+
+  // Simple render function without state changes
   const renderPage = () => {
-    setIsLoading(true); // Start loading
     switch (currentPage) {
       case "home":
-        setIsLoading(false);
         return <HomePage />;
       case "market":
-        setIsLoading(false);
         return <MarketPage />;
       case "printing":
-        setIsLoading(false);
         return <PrintingPage />;
       case "booking":
-        setIsLoading(false);
         return <BookingPage />;
       default:
-        setIsLoading(false);
         return <HomePage />;
     }
   };
@@ -1038,15 +1045,22 @@ const FreezePix = () => {
         </div>
       )}
 
-{/* Main Content */}
-{isLoading ? (
-        <div className="loading-animation">
-          <ClipLoader color="#3498db" loading={isLoading} size={60} />
-        </div>
-      ) : (
-        <main>{renderPage()}</main>
-      )}
-
+   {/* Main Content */}
+   <main className="flex-1">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-96">
+            <ClipLoader 
+              color="#3498db" 
+              loading={isLoading} 
+              size={60}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        ) : (
+          renderPage()
+        )}
+      </main>
       {/* Shopping Bag Modal */}
       {showBagModal && (
         <ShoppingBagModal onClose={() => setShowBagModal(false)} />
