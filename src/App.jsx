@@ -179,8 +179,8 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
       category: "landscapes",
       rating: 4.9,
-      sizes: ["16x20", "24x30", "30x40"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
+            frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "A breathtaking sunset over mountain peaks, captured during golden hour.",
     },
@@ -193,7 +193,7 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
       category: "abstract",
       rating: 4.8,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "Modern city architecture reflected in glass surfaces, creating abstract patterns.",
@@ -207,7 +207,7 @@ const FreezePix = () => {
         "https://images.stockcake.com/public/1/a/2/1a2c3354-6b4e-4665-a33c-6c87b14ecbf3_large/sunset-golden-hour-stockcake.jpg",
       category: "portraits",
       rating: 5.0,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "Professional portrait captured during the magical golden hour lighting.",
@@ -221,7 +221,7 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=400&h=300&fit=crop",
       category: "landscapes",
       rating: 4.7,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description: "Serene ocean waves meeting the shore in perfect harmony.",
     },
@@ -234,7 +234,7 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=400&h=300&fit=crop",
       category: "abstract",
       rating: 4.6,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "Vibrant city lights creating beautiful bokeh effects at night.",
@@ -248,7 +248,7 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=300&fit=crop",
       category: "landscapes",
       rating: 4.8,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "Majestic sand dunes shaped by wind, creating natural art forms.",
@@ -262,7 +262,7 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
       category: "landscapes",
       rating: 4.9,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "Peaceful forest path with sunlight filtering through ancient trees.",
@@ -276,7 +276,7 @@ const FreezePix = () => {
         "https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=300&fit=crop",
       category: "abstract",
       rating: 4.5,
-      sizes: ["16x20", "24x30", "30x40"],
+      sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
       frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
       description:
         "Colorful street art capturing the essence of urban creativity.",
@@ -588,22 +588,7 @@ const FreezePix = () => {
                   </select>
                 </div>
 
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t.selectFrame}
-                  </label>
-                  <select
-                    value={selectedFrame}
-                    onChange={(e) => setSelectedFrame(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
-                  >
-                    {artwork.frames.map((frame) => (
-                      <option key={frame} value={frame}>
-                        {frame}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+               
 
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
