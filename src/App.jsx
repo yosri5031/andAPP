@@ -18,8 +18,8 @@ import {
 import ClipLoader from "react-spinners/ClipLoader";
 
 const FreezePix = () => {
-    const [currentPage, setCurrentPage] = useState("home");
-    const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState("home");
+  const [isLoading, setIsLoading] = useState(false);
   const [language, setLanguage] = useState("en");
   const [showMenu, setShowMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("featured");
@@ -83,7 +83,7 @@ const FreezePix = () => {
       priceLowToHigh: "Price: Low to High",
       rating: "Rating",
       selectSize: "Select Size",
-      selectFrame: "Select Frame",
+      // selectFrame: "Select Frame", // Removed
       addToBag: "Add to Bag",
       quantity: "Quantity",
       total: "Total",
@@ -139,7 +139,7 @@ const FreezePix = () => {
       priceLowToHigh: "Prix: Bas à Élevé",
       rating: "Note",
       selectSize: "Choisir la Taille",
-      selectFrame: "Choisir le Cadre",
+      // selectFrame: "Choisir le Cadre", // Removed
       addToBag: "Ajouter au Panier",
       quantity: "Quantité",
       total: "Total",
@@ -168,6 +168,15 @@ const FreezePix = () => {
 
   const t = texts[language];
 
+  // Define size multipliers
+  const sizeMultipliers = {
+    "20x30": 1,
+    "24x36": 1.2,
+    "30x40": 1.5,
+    "40x60": 1.8,
+    "50x70": 2,
+  };
+
   // Real artwork data with actual image URLs
   const artworks = [
     {
@@ -180,7 +189,7 @@ const FreezePix = () => {
       category: "landscapes",
       rating: 4.9,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-            frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "A breathtaking sunset over mountain peaks, captured during golden hour.",
     },
@@ -194,7 +203,7 @@ const FreezePix = () => {
       category: "abstract",
       rating: 4.8,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "Modern city architecture reflected in glass surfaces, creating abstract patterns.",
     },
@@ -208,7 +217,7 @@ const FreezePix = () => {
       category: "portraits",
       rating: 5.0,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "Professional portrait captured during the magical golden hour lighting.",
     },
@@ -222,7 +231,7 @@ const FreezePix = () => {
       category: "landscapes",
       rating: 4.7,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description: "Serene ocean waves meeting the shore in perfect harmony.",
     },
     {
@@ -235,7 +244,7 @@ const FreezePix = () => {
       category: "abstract",
       rating: 4.6,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "Vibrant city lights creating beautiful bokeh effects at night.",
     },
@@ -249,7 +258,7 @@ const FreezePix = () => {
       category: "landscapes",
       rating: 4.8,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "Majestic sand dunes shaped by wind, creating natural art forms.",
     },
@@ -263,7 +272,7 @@ const FreezePix = () => {
       category: "landscapes",
       rating: 4.9,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "Peaceful forest path with sunlight filtering through ancient trees.",
     },
@@ -277,7 +286,7 @@ const FreezePix = () => {
       category: "abstract",
       rating: 4.5,
       sizes: ["20x30", "24x36", "30x40", "40x60", "50x70"],
-      frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"],
+      // frames: ["No Frame", "Black Frame", "White Frame", "Gold Frame"], // Removed
       description:
         "Colorful street art capturing the essence of urban creativity.",
     },
@@ -289,11 +298,9 @@ const FreezePix = () => {
   );
 
   // Shopping bag functions
-  const addToBag = (artwork, size, frame, quantity) => {
-    const framePrice =
-      frame === "No Frame" ? 0 : frame === "Gold Frame" ? 50 : 25;
-    const sizeMultiplier = size === "16x20" ? 1 : size === "24x30" ? 1.5 : 2;
-    const itemPrice = artwork.price * sizeMultiplier + framePrice;
+  const addToBag = (artwork, size, quantity) => { // Removed 'frame' parameter
+    const currentSizeMultiplier = sizeMultipliers[size] || 1; // Use the new multiplier map
+    const itemPrice = artwork.price * currentSizeMultiplier; // Removed framePrice
 
     const newItem = {
       id: Date.now(), // Unique ID for each bag item
@@ -302,7 +309,7 @@ const FreezePix = () => {
       artist: artwork.artist,
       image: artwork.image,
       size,
-      frame,
+      // frame, // Removed
       quantity,
       unitPrice: itemPrice,
       totalPrice: itemPrice * quantity,
@@ -365,7 +372,7 @@ const FreezePix = () => {
   // Shopping Bag Modal Component
   const ShoppingBagModal = ({ onClose }) => {
     const bagTotal = getBagTotal();
-    const shipping = bagTotal > 200 ? 0 : 25;
+    const shipping = 15; // Fixed shipping cost to $15
     const tax = bagTotal * 0.08;
     const orderTotal = bagTotal + shipping + tax;
 
@@ -421,9 +428,9 @@ const FreezePix = () => {
                             <p className="text-sm text-gray-600">
                               Size: {item.size}
                             </p>
-                            <p className="text-sm text-gray-600">
+                            {/* <p className="text-sm text-gray-600">
                               Frame: {item.frame}
-                            </p>
+                            </p> */} {/* Removed */}
                             <p className="text-sm font-semibold text-gray-800">
                               ${item.unitPrice}
                             </p>
@@ -526,18 +533,17 @@ const FreezePix = () => {
   // Enhanced Buy Modal Component
   const BuyModal = ({ artwork, onClose }) => {
     const [selectedSize, setSelectedSize] = useState(artwork.sizes[0]);
-    const [selectedFrame, setSelectedFrame] = useState(artwork.frames[0]);
+    // const [selectedFrame, setSelectedFrame] = useState(artwork.frames[0]); // Removed
     const [quantity, setQuantity] = useState(1);
 
-    const framePrice =
-      selectedFrame === "No Frame"
-        ? 0
-        : selectedFrame === "Gold Frame"
-        ? 50
-        : 25;
-    const sizeMultiplier =
-      selectedSize === "16x20" ? 1 : selectedSize === "24x30" ? 1.5 : 2;
-    const totalPrice = (artwork.price * sizeMultiplier + framePrice) * quantity;
+    // const framePrice = // Removed
+    //   selectedFrame === "No Frame"
+    //     ? 0
+    //     : selectedFrame === "Gold Frame"
+    //     ? 50
+    //     : 25;
+    const currentSizeMultiplier = sizeMultipliers[selectedSize] || 1; // Use the new multiplier map
+    const totalPrice = (artwork.price * currentSizeMultiplier) * quantity; // Removed framePrice
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -588,7 +594,23 @@ const FreezePix = () => {
                   </select>
                 </div>
 
-               
+                {/* Removed Frame Selection */}
+                {/* <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t.selectFrame}
+                  </label>
+                  <select
+                    value={selectedFrame}
+                    onChange={(e) => setSelectedFrame(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                  >
+                    {artwork.frames.map((frame) => (
+                      <option key={frame} value={frame}>
+                        {frame}
+                      </option>
+                    ))}
+                  </select>
+                </div> */}
 
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -610,14 +632,15 @@ const FreezePix = () => {
                   </div>
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-gray-600">Size Multiplier:</span>
-                    <span>x{sizeMultiplier}</span>
+                    <span>x{currentSizeMultiplier}</span>
                   </div>
-                  {framePrice > 0 && (
+                  {/* Removed Frame Price Display */}
+                  {/* {framePrice > 0 && (
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-gray-600">Frame:</span>
                       <span>+${framePrice}</span>
                     </div>
-                  )}
+                  )} */}
                   <div className="flex justify-between items-center mb-4 text-lg font-bold">
                     <span>{t.total}:</span>
                     <span>${totalPrice}</span>
@@ -635,8 +658,7 @@ const FreezePix = () => {
                         addToBag(
                           artwork,
                           selectedSize,
-                          selectedFrame,
-                          quantity
+                          quantity // Removed selectedFrame
                         );
                         onClose();
                       }}
